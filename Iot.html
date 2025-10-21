@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SipSafe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6b00 0%, #ff8c00 50%, #ffa500 100%);
+            min-height: 100vh;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #02f73f 0%, #fbfb26 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            overflow: hidden; /* Added to prevent image overflow */
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            border-radius: 12px; 
+        }
+
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 6rem 5%;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .primary-button {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 1.1rem;
+        }
+
+        .primary-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 2px solid white;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .secondary-button:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .dashboard-preview {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .features-section {
+            background: linear-gradient(135deg, #ff6b00 0%, #ff8c00 50%, #ffa500 100%);
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2.5rem;
+            border-radius: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgb(236, 248, 9);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            color: #f9fafa;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #fcfcfc;
+            line-height: 1.6;
+            font-size: 24px;
+        }
+
+        .panel-section {
+            background: linear-gradient(135deg, #ff6b00 0%, #ff8c00 50%, #ffa500 100%);
+            padding: 5rem 5%;
+            text-align: center;
+        }
+
+        .panel-section h2 {
+            font-size: 2.5rem;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .panel-section p {
+            font-size: 24px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            font-weight: bold;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .panel-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 18px 50px;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+        }
+
+        .panel-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.4);
+        }
+        .about-section {
+            background: linear-gradient(135deg, #ff6b00 0%, #ff8c00 50%, #ffa500 100%);
+            padding: 5rem 5%;
+            text-align: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-section h2 {
+            font-size: 2.5rem;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-section p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.95);
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        @media (max-width: 968px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                padding: 3rem 5%;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .features-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-section">
+            <div class="logo"><img src="lo.png"></div>
+            <div class="brand-name">SipSafe</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#panel">IoT Panel</a></li>
+            <li><a href="#about">About</a></li> <!-- Fixed typo: <l> to <li> -->
+        </ul>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>IoT-Based Alcohol Detection System for Drivers</h1>
+            <p>The IoT-Based Alcohol Detection System for Drivers is a prototype that uses an MQ-3 alcohol sensor and an Arduino microcontroller to detect alcohol levels in the driver’s breath. If the detected level exceeds a set threshold, the system triggers a voice alarm or disables the vehicle ignition to prevent drunk driving accidents.</p>
+            <div class="button-group">
+                <a href="#panel" class="primary-button">View IoT Panel</a>
+                <a href="#features" class="secondary-button">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?w=800&h=600&fit=crop" alt="IoT Dashboard" class="dashboard-preview">
+        </div>
+    </section>
+
+    <section class="features-section" id="features">
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Automatic Ignition Lock System</h3>
+            <p>Prevents the vehicle from starting if the driver’s breath contains alcohol beyond the safe limit. This feature ensures safety by stopping drunk driving before it happens.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🍷</div>
+            <h3>Real-Time Alcohol Detection</h3>
+            <p>Uses an MQ-3 alcohol sensor to continuously detect alcohol levels in the driver’s breath. The system instantly processes data and sends alerts if alcohol is detected.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📟</div>
+            <h3>IoT-Based Monitoring Display</h3>
+            <p>Displays the detected alcohol level and system status through an IoT-enabled interface (like an LCD).</p>
+        </div>
+    </section>
+
+    <section class="panel-section" id="panel">
+        <h2>Explore Our IoT Concept</h2>
+        <p>Click the button below to view our complete IoT system design in Canva.</p>
+        <a href="https://www.canva.com/design/DAGz-USV7dU/DboIAY4o4MOBVRC9nq39gw/edit?utm_content=DAGz-USV7dU&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="panel-button">
+            Open IoT Concept in Canva
+        </a>
+    </section>
+
+    <section class="about-section" id="about">
+        <h2>About SipSafe</h2>
+        <p>SipSafe is an innovative IoT-based solution designed to enhance road safety by preventing drunk driving. Our system integrates advanced sensors and microcontrollers to detect alcohol levels in real-time, ensuring drivers are sober before operating a vehicle. Learn more about our mission to save lives and promote responsible driving.</p>
+    </section>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
